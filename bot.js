@@ -35,7 +35,7 @@ class Bot {
     }
 
     async inputReRender(){
-        await this.browser.waitFor(5000);
+        await this.browser.waitFor(1000);
         await this.browser.click('button[class*="Button-sc-1fhcnov-2"]');
         await this.browser.waitFor(500);
         await this.browser.click('.lhvBPE');
@@ -45,9 +45,6 @@ class Bot {
     
 
     async getImage(){
-        
-        await this.browser.waitFor(14000);
-
         await this.browser._client.send('Page.setDownloadBehavior', {behavior: 'allow', downloadPath: '/images'});
 
         this.browser.on('response', async (response) => {

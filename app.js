@@ -5,17 +5,32 @@ const bot = new Bot();
 
 const app = async () => {
 
-    await bot.init();
-    
-    await bot.input("nebula storm");
-    
-    await bot.getImage();
-    
-    for (let index = 0; index < 5; index++) {
-        await bot.inputReRender();
+    let args = process.argv.splice(2).join(' ').split(',');
 
-        await bot.getImage();
+    if (args.length > 1) {
+        let number = parseInt(args[1]);
+        if (number >= 0 && number < 20) {
+            
+            await bot.init();
+            
+            await bot.input(args[0]);
+            
+            await bot.getImage();
+            
+            for (let index = 0; index < number; index++) {
+                await bot.inputReRender();
+        
+                await bot.getImage();
+            }
+            return;
+        }else{
+            console.log("Please enter a number bewteen 1 and 20");
+        }
+
+    }else{
+        console.log("No arguments passed : node app.js [text], [number]");
     }
+
 };
 
 app();
